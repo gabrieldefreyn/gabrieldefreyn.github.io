@@ -1,11 +1,52 @@
-/* Definindo as cores baseadas no logo */
+/* ================================================= */
+/* ============== VARIÁVEIS DE CORES (MODO ESCURO - PADRÃO) ============== */
+/* ================================================= */
 :root {
-    --primary-orange: #EB6B24; /* Laranja principal do logo */
-    --dark-bg: #1C1C1C;      /* Fundo escuro (preto/cinza) */
-    --light-text: #FFFFFF;     /* Texto branco */
-    --accent-gold: #D4A017;     /* Dourado do bico da águia */
-    --card-bg: #2A2A2A;       /* Fundo um pouco mais claro para os cards */
+    /* Mapeando suas cores antigas para novos nomes mais fáceis de mudar */
+    --primary-orange: #EB6B24;  /* Laranja principal do clube */
+    --accent-gold: #D4A017;     /* Dourado de destaque */
+    
+    /* Variáveis do Tema Escuro */
+    --bg-primary: #1C1C1C;      /* Fundo principal escuro */
+    --bg-card: #2A2A2A;         /* Fundo de cards escuro */
+    --text-main: #FFFFFF;       /* Texto principal (antigo --light-text) */
+    --text-secondary: #888888;  /* Texto secundário (cinza) */
+    --border-color: #444;       /* Cor de borda/linha sutil */
+    --header-bg: #111;          /* Fundo do topo mais escuro */
+    --highlight-bg: #38291f;    /* Fundo dos jogadores destacados */
 }
+
+/* ================================================= */
+/* ============== MEDIA QUERY: MODO CLARO AUTOMÁTICO ============== */
+/* ================================================= */
+/* Este bloco sobrescreve as variáveis acima se o sistema do usuário estiver no modo claro */
+@media (prefers-color-scheme: light) {
+    :root {
+        /* Variáveis do Tema Claro */
+        --bg-primary: #F5F5F5;      /* Fundo principal bem claro */
+        --bg-card: #FFFFFF;         /* Fundo de cards branco */
+        --text-main: #1C1C1C;       /* Texto principal escuro */
+        --text-secondary: #555555;  /* Texto secundário */
+        --border-color: #CCCCCC;    /* Borda/linha clara */
+        --header-bg: #EAEAEA;       /* Fundo do topo mais claro */
+        --highlight-bg: #ffe8d6;    /* Fundo de destaque suave para o claro */
+    }
+    
+    /* Estilos específicos que precisam de ajuste fino no modo claro */
+    header {
+        background-color: var(--header-bg) !important;
+    }
+    /* Hover da navegação deve voltar para o dark-bg para contraste */
+    nav a:hover {
+        background-color: var(--accent-gold) !important;
+        color: var(--bg-primary) !important;
+    }
+}
+
+
+/* ================================================= */
+/* ============== ESTILOS GERAIS (USANDO VARIÁVEIS) ============== */
+/* ================================================= */
 
 /* Reset básico e fontes */
 * {
@@ -16,14 +57,15 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--dark-bg);
-    color: var(--light-text);
+    background-color: var(--bg-primary); /* USA VARIÁVEL */
+    color: var(--text-main);           /* USA VARIÁVEL */
     line-height: 1.6;
+    transition: background-color 0.5s, color 0.5s; /* Transição suave */
 }
 
 /* Cabeçalho */
 header {
-    background-color: #111;
+    background-color: var(--header-bg); /* USA VARIÁVEL */
     padding: 20px;
     text-align: center;
     border-bottom: 4px solid var(--primary-orange);
@@ -42,7 +84,7 @@ header h1 {
 
 header p {
     font-size: 1.1em;
-    color: #ccc;
+    color: var(--text-secondary); /* USA VARIÁVEL */
 }
 
 /* Navegação */
@@ -56,7 +98,7 @@ nav {
 }
 
 nav a {
-    color: var(--light-text);
+    color: var(--text-main); /* USA VARIÁVEL */
     text-decoration: none;
     padding: 10px 20px;
     font-weight: bold;
@@ -66,7 +108,7 @@ nav a {
 
 nav a:hover {
     background-color: var(--accent-gold);
-    color: var(--dark-bg);
+    color: var(--bg-primary); /* USA VARIÁVEL */
 }
 
 /* Conteúdo Principal */
@@ -95,12 +137,12 @@ h2 {
 }
 
 .game-card {
-    background-color: var(--card-bg);
-    border: 1px solid #444;
+    background-color: var(--bg-card); /* USA VARIÁVEL */
+    border: 1px solid var(--border-color); /* USA VARIÁVEL */
     padding: 20px;
     border-radius: 8px;
     position: relative;
-    overflow: hidden; /* Para o status */
+    overflow: hidden;
 }
 
 .game-card .status {
@@ -111,13 +153,13 @@ h2 {
     font-weight: bold;
     padding: 4px 8px;
     border-radius: 4px;
-    color: var(--light-text);
+    color: var(--text-main);
 }
 
-.status.fim { background-color: #555; }
-.status.tbd { background-color: var(--accent-gold); color: var(--dark-bg); }
+.status.fim { background-color: var(--border-color); } /* Ajustado */
+.status.tbd { background-color: var(--accent-gold); color: var(--bg-primary); } /* Ajustado */
 .status.live { 
-    background-color: #D32F2F; /* Vermelho */
+    background-color: #D32F2F;
     animation: pulse 1.5s infinite;
 }
 
@@ -129,7 +171,7 @@ h2 {
 
 .game-card .date {
     font-size: 0.9em;
-    color: #bbb;
+    color: var(--text-secondary); /* USA VARIÁVEL */
     margin-bottom: 15px;
     display: block;
 }
@@ -153,7 +195,7 @@ h2 {
     font-size: 0.95em;
     font-style: italic;
     margin-top: 20px;
-    color: #ddd;
+    color: var(--text-secondary); /* USA VARIÁVEL */
     text-align: center;
 }
 
@@ -183,7 +225,7 @@ h2 {
 }
 
 .team.away {
-    color: var(--light-text);
+    color: var(--text-main); /* USA VARIÁVEL */
 }
 
 /* Tabela de Histórico */
@@ -194,24 +236,24 @@ table {
 }
 
 th, td {
-    border: 1px solid #555;
+    border: 1px solid var(--border-color); /* USA VARIÁVEL */
     padding: 12px;
     text-align: left;
 }
 
 th {
     background-color: var(--primary-orange);
-    color: var(--dark-bg);
+    color: var(--bg-primary); /* USA VARIÁVEL */
     font-size: 1.1em;
 }
 
 tr:nth-child(even) {
-    background-color: var(--card-bg);
+    background-color: var(--bg-card); /* USA VARIÁVEL */
 }
 
 /* Seção Sobre */
 .about-card {
-    background-color: var(--card-bg);
+    background-color: var(--bg-card); /* USA VARIÁVEL */
     padding: 20px;
     border-radius: 8px;
 }
@@ -226,9 +268,9 @@ footer {
     text-align: center;
     margin-top: 40px;
     padding: 20px;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border-color); /* USA VARIÁVEL */
     font-size: 0.9em;
-    color: #888;
+    color: var(--text-secondary); /* USA VARIÁVEL */
 }
 
 
@@ -242,7 +284,7 @@ footer {
 }
 
 .news-card {
-    background-color: var(--card-bg);
+    background-color: var(--bg-card); /* USA VARIÁVEL */
     border-radius: 8px;
     padding: 20px;
     border-left: 4px solid var(--primary-orange); 
@@ -252,7 +294,7 @@ footer {
 
 .news-date {
     font-size: 0.85em;
-    color: #bbb;
+    color: var(--text-secondary); /* USA VARIÁVEL */
     display: block;
     margin-bottom: 8px;
 }
@@ -264,7 +306,7 @@ footer {
 }
 
 .news-card p {
-    color: #ddd;
+    color: var(--text-main); /* USA VARIÁVEL */
     margin-bottom: 15px;
     flex-grow: 1;
 }
@@ -278,7 +320,7 @@ footer {
 }
 
 .read-more:hover {
-    color: var(--light-text);
+    color: var(--text-main);
 }
 
 
@@ -287,7 +329,7 @@ footer {
 /* ================================== */
 .elenco-info {
     font-style: italic;
-    color: #bbb;
+    color: var(--text-secondary); /* USA VARIÁVEL */
     margin-bottom: 20px;
 }
 
@@ -299,7 +341,7 @@ footer {
 
 .position-group h3 {
     color: var(--accent-gold);
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--border-color); /* USA VARIÁVEL */
     padding-bottom: 5px;
     margin-bottom: 15px;
     font-size: 1.5em;
@@ -312,13 +354,13 @@ footer {
 }
 
 .player-name-card {
-    background-color: var(--card-bg);
+    background-color: var(--bg-card); /* USA VARIÁVEL */
     padding: 10px 15px;
     border-radius: 5px;
     font-size: 1em;
     font-weight: normal;
     transition: background-color 0.2s ease;
-    border: 1px solid #333;
+    border: 1px solid var(--border-color); /* USA VARIÁVEL */
 }
 
 .player-name-card:hover {
@@ -327,9 +369,9 @@ footer {
 
 /* Destaque para jogadores que marcaram gols */
 .player-name-card.highlighted {
-    background-color: #38291f;
+    background-color: var(--highlight-bg); /* USA VARIÁVEL */
     border: 1px solid var(--primary-orange);
-    color: var(--light-text);
+    color: var(--text-main);
     font-weight: bold;
 }
 
@@ -342,7 +384,7 @@ footer {
 /* ================================== */
 
 .full-news-article {
-    background-color: var(--card-bg);
+    background-color: var(--bg-card); /* USA VARIÁVEL */
     padding: 30px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -353,12 +395,12 @@ footer {
     color: var(--primary-orange);
     font-size: 1.8em;
     margin-bottom: 15px;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--border-color); /* USA VARIÁVEL */
     padding-bottom: 5px;
 }
 
 .full-news-article p {
-    color: #ddd;
+    color: var(--text-main); /* USA VARIÁVEL */
     font-size: 1.1em;
     margin-bottom: 15px;
     line-height: 1.7;
@@ -371,7 +413,7 @@ footer {
 .separator {
     border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, transparent, #444, transparent);
+    background-image: linear-gradient(to right, transparent, var(--border-color), transparent); /* USA VARIÁVEL */
     margin: 40px 0;
 }
 
@@ -379,8 +421,8 @@ footer {
     display: inline-block;
     margin-top: 20px;
     text-decoration: none;
-    color: var(--light-text);
-    background-color: #333;
+    color: var(--text-main); /* USA VARIÁVEL */
+    background-color: var(--border-color); /* USA VARIÁVEL */
     padding: 10px 15px;
     border-radius: 5px;
     font-weight: bold;
@@ -389,8 +431,9 @@ footer {
 
 .return-link:hover {
     background-color: var(--primary-orange);
-    color: var(--dark-bg);
+    color: var(--bg-primary); /* USA VARIÁVEL */
 }
+
 
 /* ================================================= */
 /* ============== MEDIA QUERIES (RESPONSIVIDADE) ============== */
@@ -404,7 +447,6 @@ footer {
 
     /* Navegação */
     nav {
-        /* Permite que o menu quebre a linha se a tela for muito estreita */
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -412,10 +454,9 @@ footer {
     }
 
     nav a {
-        /* Reduz o padding e a fonte dos links */
         padding: 8px 10px;
         font-size: 0.9em;
-        margin: 5px 2px; /* Adiciona uma pequena margem para não grudarem */
+        margin: 5px 2px;
     }
 
     /* Seções e Títulos */
@@ -425,10 +466,8 @@ footer {
     }
     
     /* Notícias */
-    /* Em telas pequenas, as notícias naturalmente passarão a uma coluna, 
-       mas vamos garantir um padding melhor */
     .news-container {
-        grid-template-columns: 1fr; /* Força uma única coluna */
+        grid-template-columns: 1fr;
     }
     
     /* Jogos */
@@ -437,22 +476,21 @@ footer {
     }
 
     .match-info {
-        /* Altera a direção para empilhar o placar no centro */
         flex-direction: column;
         align-items: center;
     }
     
     .team-logo-wrapper {
-        margin-bottom: 10px; /* Espaço entre o logo e o placar centralizado */
+        margin-bottom: 10px;
     }
 
     .match-info .score {
         font-size: 2em;
-        margin: 10px 0; /* Mais espaço vertical */
+        margin: 10px 0;
     }
 
     .team-logo {
-        max-width: 40px; /* Reduz o tamanho do logo no celular */
+        max-width: 40px;
         max-height: 40px;
     }
 
@@ -461,31 +499,27 @@ footer {
         display: block;
     }
     
-    /* Oculta o cabeçalho (th) visualmente, mas mantém acessível */
     thead tr {
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
     
-    /* Estiliza cada linha (tr) */
     tr {
-        border: 1px solid #555;
+        border: 1px solid var(--border-color); /* USA VARIÁVEL */
         margin-bottom: 10px;
         border-radius: 5px;
     }
     
-    /* Estiliza cada célula (td) para mostrar a label */
     td {
         border: none;
         position: relative;
-        padding-left: 50%; /* Espaço para o pseudo-elemento */
+        padding-left: 50%;
         text-align: right;
     }
     
-    /* Adiciona a Label (cabeçalho da coluna) antes do conteúdo real */
     td:before {
-        content: attr(data-label); /* Usa o atributo data-label (que precisa ser adicionado no HTML) */
+        content: attr(data-label);
         position: absolute;
         left: 6px;
         width: 45%;
@@ -498,7 +532,6 @@ footer {
     
     /* Elenco */
     .player-list-grid {
-        /* Reduz as colunas para o celular */
         grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     }
 
