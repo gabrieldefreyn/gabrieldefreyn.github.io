@@ -130,14 +130,14 @@ h2 {
 .game-card .date {
     font-size: 0.9em;
     color: #bbb;
-    margin-bottom: 15px; /* Aumentei a margem */
+    margin-bottom: 15px;
     display: block;
 }
 
 .match-info {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Alinha no topo */
+    align-items: flex-start;
     font-weight: bold;
 }
 
@@ -145,16 +145,16 @@ h2 {
     flex: 0.5;
     text-align: center;
     color: var(--accent-gold);
-    font-size: 2.2em; /* Aumentei o placar */
-    margin-top: 10px; /* Desci um pouco */
+    font-size: 2.2em;
+    margin-top: 10px;
 }
 
 .scorers {
     font-size: 0.95em;
     font-style: italic;
-    margin-top: 20px; /* Aumentei a margem */
+    margin-top: 20px;
     color: #ddd;
-    text-align: center; /* Centralizei os marcadores */
+    text-align: center;
 }
 
 /* Estilos para os Logos */
@@ -283,7 +283,7 @@ footer {
 
 
 /* ================================== */
-/* ====== NOVOS ESTILOS (ELENCO) ====== */
+/* ====== ESTILOS (ELENCO) ====== */
 /* ================================== */
 .elenco-info {
     font-style: italic;
@@ -291,45 +291,228 @@ footer {
     margin-bottom: 20px;
 }
 
-.elenco-container {
+.squad-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.position-group h3 {
+    color: var(--accent-gold);
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.player-list-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Cards menores */
-    gap: 15px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
 }
 
-.player-card {
+.player-name-card {
     background-color: var(--card-bg);
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    border: 1px solid var(--primary-orange);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.player-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(235, 107, 36, 0.4);
-}
-
-.player-card h3 {
-    color: var(--light-text);
-    font-size: 1.3em;
-    margin-bottom: 5px;
-}
-
-.player-card .role {
-    font-size: 0.9em;
-    color: #aaa;
-    margin-bottom: 10px;
-}
-
-.player-card .goals {
-    display: inline-block;
-    background-color: var(--accent-gold);
-    color: var(--dark-bg);
-    font-weight: bold;
-    padding: 5px 10px;
+    padding: 10px 15px;
     border-radius: 5px;
-    font-size: 0.9em;
+    font-size: 1em;
+    font-weight: normal;
+    transition: background-color 0.2s ease;
+    border: 1px solid #333;
+}
+
+.player-name-card:hover {
+    background-color: #353535;
+}
+
+/* Destaque para jogadores que marcaram gols */
+.player-name-card.highlighted {
+    background-color: #38291f;
+    border: 1px solid var(--primary-orange);
+    color: var(--light-text);
+    font-weight: bold;
+}
+
+.player-name-card.highlighted strong {
+    color: var(--primary-orange);
+}
+
+/* ================================== */
+/* ====== ESTILOS (PÁGINA DE NOTÍCIAS pag002.html) ====== */
+/* ================================== */
+
+.full-news-article {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border-left: 5px solid var(--primary-orange);
+}
+
+.full-news-article h3 {
+    color: var(--primary-orange);
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
+
+.full-news-article p {
+    color: #ddd;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.full-news-article strong {
+    color: var(--accent-gold);
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, transparent, #444, transparent);
+    margin: 40px 0;
+}
+
+.return-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: var(--light-text);
+    background-color: #333;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.return-link:hover {
+    background-color: var(--primary-orange);
+    color: var(--dark-bg);
+}
+
+/* ================================================= */
+/* ============== MEDIA QUERIES (RESPONSIVIDADE) ============== */
+/* ================================================= */
+
+@media (max-width: 768px) {
+    /* Ajustes Gerais para Tablets e Celulares */
+    header h1 {
+        font-size: 2em;
+    }
+
+    /* Navegação */
+    nav {
+        /* Permite que o menu quebre a linha se a tela for muito estreita */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 5px;
+    }
+
+    nav a {
+        /* Reduz o padding e a fonte dos links */
+        padding: 8px 10px;
+        font-size: 0.9em;
+        margin: 5px 2px; /* Adiciona uma pequena margem para não grudarem */
+    }
+
+    /* Seções e Títulos */
+    h2 {
+        font-size: 1.6em;
+        text-align: center;
+    }
+    
+    /* Notícias */
+    /* Em telas pequenas, as notícias naturalmente passarão a uma coluna, 
+       mas vamos garantir um padding melhor */
+    .news-container {
+        grid-template-columns: 1fr; /* Força uma única coluna */
+    }
+    
+    /* Jogos */
+    .game-card {
+        padding: 15px;
+    }
+
+    .match-info {
+        /* Altera a direção para empilhar o placar no centro */
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .team-logo-wrapper {
+        margin-bottom: 10px; /* Espaço entre o logo e o placar centralizado */
+    }
+
+    .match-info .score {
+        font-size: 2em;
+        margin: 10px 0; /* Mais espaço vertical */
+    }
+
+    .team-logo {
+        max-width: 40px; /* Reduz o tamanho do logo no celular */
+        max-height: 40px;
+    }
+
+    /* Tabela de Histórico */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    /* Oculta o cabeçalho (th) visualmente, mas mantém acessível */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    /* Estiliza cada linha (tr) */
+    tr {
+        border: 1px solid #555;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+    
+    /* Estiliza cada célula (td) para mostrar a label */
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50%; /* Espaço para o pseudo-elemento */
+        text-align: right;
+    }
+    
+    /* Adiciona a Label (cabeçalho da coluna) antes do conteúdo real */
+    td:before {
+        content: attr(data-label); /* Usa o atributo data-label (que precisa ser adicionado no HTML) */
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: var(--primary-orange);
+    }
+    
+    /* Elenco */
+    .player-list-grid {
+        /* Reduz as colunas para o celular */
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    }
+
+    .player-name-card {
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    /* Notícias Detalhe (pag002.html) */
+    .full-news-article {
+        padding: 20px;
+    }
+
+    .full-news-article h3 {
+        font-size: 1.4em;
+    }
 }
